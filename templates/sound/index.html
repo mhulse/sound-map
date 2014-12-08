@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Hulse Apps</title>
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.0.0/build/cssfonts/fonts-min.css&3.0.0/build/cssreset/reset-min.css&3.0.0/build/cssbase/base-min.css">
+<style type="text/css" media="screen">
+  html, body, #map { height:100%; }
+  body { margin:0; padding:0; overflow:hidden; }
+</style>
+</head>
+<body>
+
+<div id="map" style="position: relative;"></div>
+
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=geometry&amp;sensor=false"></script>
+<script type="text/javascript">
+	<!--
+		/* Show map until loaded?
+		http://groups.google.com/group/google-maps-js-api-v3/msg/a9dda851790a6c54
+		*/
+		
+		function showCrossHair(divId) {
+			var mmap = document.getElementById(divId);
+			var div = document.createElement('div');
+			div.id = 'crossHair';
+			div.style.position = 'absolute';
+			div.style.padding = '0';
+			div.style.marginLeft = '-10px';
+			div.style.marginTop = '-10px';
+			div.style.left = '50%';
+			div.style.top = '50%';
+			div.style.zIndex = '5000';
+			div.innerHTML = '<img src="http://oontz.me/static/sound/crosshair.gif">';
+			div.innerHTML = div.innerHTML;
+			crossHairDiv = div;
+			mmap.appendChild(div);
+		};
+		
+		function initialize() {
+			
+			var myLatlng = new google.maps.LatLng(44.050000,-123.090000);
+			
+			var myOptions = {
+				zoom: 13,
+				center: myLatlng,
+				//mapTypeId: google.maps.MapTypeId.TERRAIN
+				mapTypeId: google.maps.MapTypeId.HYBRID
+			}
+			
+			var map = new google.maps.Map(document.getElementById('map'), myOptions);
+			
+			//showCrossHair('map');
+			
+			{% if data %}
+				
+				//var l1 = new google.maps.KmlLayer('http://oontz.me/soundmap/{{ data.sid }}.kml'); //, { preserveViewport: true }
+				var l1 = new google.maps.KmlLayer('http://oontz.me/soundmap/{{ data.sid }}.kml?t=' + Math.round(1000 * Math.random())); //, { preserveViewport: true }
+				l1.setMap(map);
+				
+			{% endif %}
+			
+		};
+		
+		$(document).ready(function() {
+			
+			// Map:
+			initialize();
+			
+		});
+		
+	//-->
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<kml creator="Micky Hulse http://hulse.me" xmlns="http://earth.google.com/kml/2.0">
+	
+	<Document>
+		
+		<Folder>
+		
+			<name>Soundscape</name>
+			<description>A community sound that is unique or posses qualities that make especially regarded or noted people in that community.</description>
+			
+			{% for location in data %}
+				
+				<Placemark>
+					<name>{% if location.title %}{{ location.title }}{% else %}{{ location }}{% endif %}</name>
+					<Point>
+						<altitudeMode>clampedToGround</altitudeMode>
+						<coordinates>{{location.longitude}},{{location.latitude}}</coordinates>
+					</Point>
+					<Snippet><![CDATA[0-2108157 @ 08/27/2011 04:51:32 p.m.]]></Snippet>
+					<description><![CDATA[{% if location.description %}{{ location.description }}{% else %}{{ location.title }}{% endif %}]]></description>
+					<styleUrl>#gv_waypoint</styleUrl>
+				</Placemark>
+				
+				<visibility>1</visibility>
+				
+			{% endfor %}
+			
+		</Folder>
+		<!--
+		<Snippet><![CDATA[created at <a href="http://hulse.me">hulse.me</A>]]></Snippet>
+		<Style id="gv_waypoint">
+			<IconStyle>
+				<Icon>
+					<href>http://sandbox.hulse.me/marker/marker.png</href>
+				</Icon>
+				<color>FFFFFFFF</color>
+				<colorMode>normal</colorMode>
+				<hotSpot x="0.5" xunits="fraction" y="0.5" yunits="fraction" />
+			</IconStyle>
+			<LabelStyle>
+				<color>FFFFFFFF</color>
+			</LabelStyle>
+		</Style>
+		-->
+		<open>0</open>
+		
+		<visibility>1</visibility>
+		
+	</Document>
+	
+</kml>

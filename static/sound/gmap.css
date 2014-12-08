@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+.gmap {}
+	.gmap .gmap_address {
+		border: 1px solid #ccc;
+		width: 50%;
+		margin-right: 5px;
+		padding: 5px;
+	}
+	.gmap .gmap_wrap {
+		 margin-top: 10px;
+		 position: relative;
+	}
+		.gmap .gmap_wrap .gmap_map {
+			width: 100%;
+			height: 100%;
+		}
+		.gmap .gmap_wrap .crosshair {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			z-index: 999;
+			width: 20px;
+			height: 20px;
+			margin: -10px 0 0 -10px;
+			display: block;
+			background: url(crosshair.gif) no-repeat;
+		}
